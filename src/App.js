@@ -4,28 +4,47 @@ import UrlService from "./services/url";
 
 function App() {
   const [longUrl, setLongUrl] = useState("");
+  const [shortUrls, setShortUrls] = useState([]);
 
-  const baseURL = "http://localhost:8080/";
+  const baseUrl = "localhost:8080/";
+
   const handleUrlInput = (event) => {
     setLongUrl(event.target.value);
-    console.log(longUrl);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     UrlService.getShortUrl(longUrl).then((res) => {
-      alert(baseURL + res.data);
+      const newUrl = { destination: longUrl, shortUrl: baseUrl + res.data };
+      setShortUrls(shortUrls.concat(newUrl));
     });
   };
 
   return (
-    <div>
+    <div className="container">
+      <h1 className="title">Shorturl</h1>
       <form>
-        <input type="text" value={longUrl} onChange={handleUrlInput}></input>
-        <button type="submit" onClick={handleSubmit}>
-          Get short Url
-        </button>
+        <input
+          className="url-input"
+          placeholder="Enter the link here "
+          type="text"
+          value={longUrl}
+          onChange={handleUrlInput}
+        ></input>
+        <div className="submit-btn">
+          <button type="submit" onClick={handleSubmit}>
+            Get short Url
+          </button>
+        </div>
       </form>
+      <ul>
+        {shortUrls.map((pair) => (
+          <li key={pair.shortUrl}>
+            Long Url: {pair.destination}
+            Short Url: {pair.shortUrl}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
