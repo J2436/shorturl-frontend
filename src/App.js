@@ -1,24 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import UrlService from "./services/url";
 
 function App() {
+  const [longUrl, setLongUrl] = useState("");
+
+  const baseURL = "http://localhost:8080/";
+  const handleUrlInput = (event) => {
+    setLongUrl(event.target.value);
+    console.log(longUrl);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    UrlService.getShortUrl(longUrl).then((res) => {
+      alert(baseURL + res.data);
+    });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <form>
+        <input type="text" value={longUrl} onChange={handleUrlInput}></input>
+        <button type="submit" onClick={handleSubmit}>
+          Get short Url
+        </button>
+      </form>
     </div>
   );
 }
