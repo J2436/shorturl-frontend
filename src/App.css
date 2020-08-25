@@ -1,6 +1,6 @@
 .container {
   text-align: center;
-  background-color: #f5f4f0;
+  margin-top: 50vh;
 }
 
 .title {
@@ -8,10 +8,12 @@
 
 .submit-btn {
   margin-top: 20px;
+  border-radius: 10px;
 }
 
 .url-input {
   font-size: 25px;
   border: 0.1px solid black;
   text-align: center;
+  border-radius: 4px;
 }

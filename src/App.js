@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import UrlService from "./services/url";
-
+import LinkList from "./components/LinkList";
 function App() {
   const [longUrl, setLongUrl] = useState("");
   const [shortUrls, setShortUrls] = useState([]);
@@ -14,10 +14,14 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    UrlService.getShortUrl(longUrl).then((res) => {
-      const newUrl = { destination: longUrl, shortUrl: baseUrl + res.data };
-      setShortUrls(shortUrls.concat(newUrl));
-    });
+    // Check if the longUrl link has already been shortened
+    if (!shortUrls.some((element) => element.longUrl === longUrl)) {
+      UrlService.getShortUrl(longUrl).then((res) => {
+        const newUrl = { longUrl, shortUrl: baseUrl + res.data };
+        setShortUrls(shortUrls.concat(newUrl));
+      });
+    } else {
+    }
   };
 
   return (
@@ -31,19 +35,14 @@ function App() {
           value={longUrl}
           onChange={handleUrlInput}
         ></input>
-        <div className="submit-btn">
-          <button type="submit" onClick={handleSubmit}>
+        <div>
+          <button className="submit-btn" type="submit" onClick={handleSubmit}>
             Get short Url
           </button>
         </div>
       </form>
       <ul>
-        {shortUrls.map((pair) => (
-          <li key={pair.shortUrl}>
-            Long Url: {pair.destination}
-            Short Url: {pair.shortUrl}
-          </li>
-        ))}
+        <LinkList links={shortUrls} />
       </ul>
     </div>
   );
