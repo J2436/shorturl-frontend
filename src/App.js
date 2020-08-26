@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import "./App.css";
-import UrlService from "./services/url";
-import LinkList from "./components/LinkList";
+import React, {useState} from 'react';
+import './App.css';
+import UrlService from './services/url';
+import LinkList from './components/LinkList';
 function App() {
-  const [longUrl, setLongUrl] = useState("");
+  const [longUrl, setLongUrl] = useState('');
   const [shortUrls, setShortUrls] = useState([]);
 
-  const baseUrl = "localhost:8080/";
+  const baseUrl = 'localhost:8080/';
 
-  const handleUrlInput = (event) => {
+  const handleUrlInput = event => {
     setLongUrl(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
     // Check if the longUrl link has already been shortened
-    if (!shortUrls.some((element) => element.longUrl === longUrl)) {
-      UrlService.getShortUrl(longUrl).then((res) => {
-        const newUrl = { longUrl, shortUrl: baseUrl + res.data };
+    if (!shortUrls.some(element => element.longUrl === longUrl)) {
+      UrlService.getShortUrl(longUrl).then(res => {
+        const newUrl = {longUrl, shortUrl: baseUrl + res.data};
         setShortUrls(shortUrls.concat(newUrl));
       });
     } else {

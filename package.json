@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
     "bootstrap": "^4.5.2",
+    "cypress": "^5.0.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-cypress": "^2.11.1",
     "eslint-plugin-jest": "^23.20.0",

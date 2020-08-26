@@ -1,19 +1,25 @@
 .container {
-  text-align: center;
-  margin-top: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 75vh;
+  border: 1px solid black;
 }
 
 .title {
+  font-size: 75px;
 }
 
 .submit-btn {
-  margin-top: 20px;
+  margin-bottom: 25px;
   border-radius: 10px;
 }
 
 .url-input {
   font-size: 25px;
   border: 0.1px solid black;
-  text-align: center;
   border-radius: 4px;
+  margin: 25px 0px;
+  width: 50%;
 }
+
